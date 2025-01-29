@@ -319,6 +319,7 @@
 }
 
 .hpills {
+  text-decoration: none;
   background-color: transparent !important;
   color: black !important;
 }
