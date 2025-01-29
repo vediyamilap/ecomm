@@ -1,0 +1,28 @@
+@font-face {
+  font-family: "Canela";
+  src:url("./fonts/canela/Canela-Thin-Trial.otf");
+}
+@font-face {
+  font-family: "UntitledSans Regular";
+  src: url("./fonts/untitledsans/TestUntitledSans-Regular.otf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "UntitledSans Medium";
+  src: url("./fonts/untitledsans/TestUntitledSans-Medium.otf");
+}
+
+body {
+  font-family: "UntitledSans Regular";
+}
+
+.font-canela{
+  font-family: "Canela";
+}
+.font-small{
+  font-size: 12px;
+}
+.font-untitled{
+  font-family: "UntitledSans Medium";
+}
