@@ -35,75 +35,108 @@
     </div>
   </div>
 
-  <!-- products start -->
+  <!-- ============================================== -->
+  <div class="d-flex">
+    <div class="me-5">
+      <select v-model="selectedSize">
+        <option value="">All Sizes</option>
+        <option v-for="x in sizes" :key="x">
+          {{ x }}
+        </option>
+      </select>
+    </div>
 
-  <div class="container-fluid mt-5">
-    <div class="row p-4">
-      <div class="col-md-4 p-1 mb-5">
-        <img
-          src="../assets/images/shop/02.04.rs_1_15v2_ss25kn300001830_ss25tw341r000114.avif"
-          alt="Merino Cashmere Rugby Stripe Shirt"
-          class="img-fluid"
-        />
-        <a href="#" class="hpills">Merino Cashmere Rugby Stripe Shirt</a><br />
-        <span class="text-grey">Supar Pink / Pomogranate Red</span>
-        <p>28,500</p>
-      </div>
-      <div class="col-md-4 p-1 mb-5">
-        <img
-          src="../assets/images/shop/02.04.rs_1_15v2_ss25kn300001830_ss25tw341r000114.avif"
-          alt="Merino Cashmere Rugby Stripe Shirt"
-          class="img-fluid"
-        />
-        <a href="#" class="hpills">Merino Cashmere Rugby Stripe Shirt</a><br />
-        <span class="text-grey">Supar Pink / Pomogranate Red</span>
-        <p>28,500</p>
-      </div>
-      <div class="col-md-4 p-1 mb-5">
-        <img
-          src="../assets/images/shop/02.04.rs_1_15v2_ss25kn300001830_ss25tw341r000114.avif"
-          alt="Merino Cashmere Rugby Stripe Shirt"
-          class="img-fluid"
-        />
-        <a href="#" class="hpills">Merino Cashmere Rugby Stripe Shirt</a><br />
-        <span class="text-grey">Supar Pink / Pomogranate Red</span>
-        <p>28,500</p>
-      </div>
-      <div class="col-md-4">
-        <img
-          src="../assets/images/shop/02.04.rs_1_15v2_ss25kn300001830_ss25tw341r000114.avif"
-          alt="Merino Cashmere Rugby Stripe Shirt"
-          class="img-fluid"
-        />
-        <a href="#" class="hpills">Merino Cashmere Rugby Stripe Shirt</a><br />
-        <span class="text-grey">Supar Pink / Pomogranate Red</span>
-        <p>28,500</p>
-      </div>
-      <div class="col-md-4">
-        <img
-          src="../assets/images/shop/02.04.rs_1_15v2_ss25kn300001830_ss25tw341r000114.avif"
-          alt="Merino Cashmere Rugby Stripe Shirt"
-          class="img-fluid"
-        />
-        <a href="#" class="hpills">Merino Cashmere Rugby Stripe Shirt</a><br />
-        <span class="text-grey">Supar Pink / Pomogranate Red</span>
-        <p>28,500</p>
-      </div>
-      <div class="col-md-4">
-        <img
-          src="../assets/images/shop/02.04.rs_1_15v2_ss25kn300001830_ss25tw341r000114.avif"
-          alt="Merino Cashmere Rugby Stripe Shirt"
-          class="img-fluid"
-        />
-        <a href="#" class="hpills">Merino Cashmere Rugby Stripe Shirt</a><br />
-        <span class="text-grey">Supar Pink / Pomogranate Red</span>
-        <p>28,500</p>
-      </div>
+    <div>
+      <select v-model="selectedColor">
+        <option value="">All Colors</option>
+        <option v-for="x in colors" :key="x">
+          {{ x }}
+        </option>
+      </select>
     </div>
   </div>
 
-  <!-- products end -->
+  <div class="container-fluid mt-5">
+    <div class="row p-4">
+      <!-- product start -->
+      <div class="col-md-4 p-1 mb-5" v-for="x in filteredProducts" :key="x.id">
+        <img :src="x.img" :alt="x.name" class="img-fluid" />
+        <a href="#" class="hpills">{{ x.name }}</a
+        ><br />
+        <p>$ {{ x.price }}</p>
+      </div>
+      <!-- product end -->
+    </div>
+  </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      products: [
+        {
+          id: 1,
+          name: "Merino Cashmere Rugby Stripe Shirt",
+          size: "M",
+          color: "Red",
+          price: 20,
+          img: require("@/assets/images/shop/02.feb_cam_2_m016_ss25kn300_ss25tw314r_ss25acc517_ss25sh549_361.avif"),
+        },
+        {
+          id: 2,
+          name: "Double Buckle Clog",
+          size: "L",
+          color: "Brown",
+          price: 40,
+          img: require("@/assets/images/shop/accs_feb_2_ss25sh6040000560_2_1_1.avif"),
+        },
+        {
+          id: 3,
+          name: "Oversized Blazer + Pleat Front",
+          size: "S",
+          color: "Red",
+          price: 60,
+          img: require("@/assets/images/shop/02.feb_32_m002_aw24jd123_aw24acc476_ss25sh605_107_1.avif"),
+        },
+        {
+          id: 4,
+          name: "Travel Tailoring Contrast Stitch Midi Dress",
+          size: "M",
+          color: "Red",
+          price: 15,
+          img: require("@/assets/images/shop/02.feb_cam_5_ss25wd331_ss25sh606_ss25acc502_1709.avif"),
+        },
+        {
+          id: 5,
+          name: "Washed Denim Midi Dress",
+          size: "L",
+          color: "White",
+          price: 80,
+          img: require("@/assets/images/shop/02.feb_36_m002_ss25wd243_ss25sh605_aw24acc476_075.avif"),
+        },
+      ],
+      sizes: ["S", "M", "L"],
+      colors: ["Red", "Blue", "Black", "White"],
+      selectedSize: "",
+      selectedColor: "",
+    };
+  },
+  computed: {
+    filteredProducts() {
+      return this.products.filter((x) => {
+        const matchesSize = this.selectedSize
+          ? x.size === this.selectedSize
+          : true;
+        const matchesColor = this.selectedColor
+          ? x.color === this.selectedColor
+          : true;
+        return matchesSize && matchesColor;
+      });
+    },
+  },
+};
+</script>
 
 <style>
 .shopspecific {
